@@ -1,0 +1,19 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  setup:
+    desc: Build docker image
+    cmds:
+      - docker build -t vex-example .
+
+  test:
+    desc: Run test
+    cmds:
+      - docker run --rm -v $PWD:/app -w /app vex-example make test
+
+  interactive:
+    desc: Using docker container interactively
+    cmds:
+      - docker run --rm -it -p 8080:8000 -v $PWD:/app -w /app vex-example
